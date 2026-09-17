@@ -61,7 +61,7 @@ CELERY_RESULT_BACKEND = os.environ.get("CELERY_RESULT_BACKEND", "redis://localho
 CELERY_BEAT_SCHEDULE = {
     "run-all-scrapers": {
         "task": "jobs.tasks.run_all_scrapers",
-        "schedule": 900.0,
+        "schedule": 3600.0,
     },
 }
 
