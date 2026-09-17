@@ -9,6 +9,7 @@ class JobListing(models.Model):
     description = models.TextField()
     source = models.CharField(max_length=100)
     source_url = models.URLField()
+    tags = models.TextField(blank=True, default="")
     dedupe_key = models.CharField(max_length=64, unique=True)
     embedding = VectorField(dimensions=384, null=True)
     posted_at = models.DateTimeField(null=True, blank=True)

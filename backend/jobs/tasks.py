@@ -56,6 +56,7 @@ def process_scraped_job(raw_job):
         source_url=raw_job["url"],
         dedupe_key=dedupe_key,
         embedding=embedding,
+        tags=raw_job.get("tags", ""),
     )
     broadcast_new_job(job)
 

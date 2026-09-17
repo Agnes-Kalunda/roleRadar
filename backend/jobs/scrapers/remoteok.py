@@ -20,4 +20,5 @@ class RemoteOKScraper(BaseScraper):
                 "description": entry.get("description", ""),
                 "url": entry.get("url", ""),
                 "source": self.source_name,
+                "tags": ",".join(entry.get("tags", [])),
             }

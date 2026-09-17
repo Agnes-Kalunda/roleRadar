@@ -42,7 +42,7 @@ class JobSearchConsumer(AsyncWebsocketConsumer):
 
     @database_sync_to_async
     def find_existing_matches(self, keywords):
-        query = Q(title__icontains=keywords) | Q(company__icontains=keywords)
+        query = Q(title__icontains=keywords) | Q(company__icontains=keywords) | Q(tags__icontains=keywords)
         jobs = JobListing.objects.filter(query).order_by("-scraped_at")[:50]
         return [
             {
