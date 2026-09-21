@@ -5,6 +5,8 @@ const WS_URL = "ws://localhost:8000/ws/jobs/search/";
 export function useJobSearch() {
   const [jobs, setJobs] = useState([]);
   const [status, setStatus] = useState("connecting");
+  const [keywords, setKeywords] = useState("");
+  const [hasSearched, setHasSearched] = useState(false);
   const socketRef = useRef(null);
 
   useEffect(() => {
@@ -18,11 +20,17 @@ export function useJobSearch() {
 
       if (data.event === "search_started") {
         setJobs([]);
+        setKeywords(data.keywords);
         setStatus("searching");
       }
 
       if (data.event === "job_match") {
         setJobs((previous) => [data.job, ...previous]);
+      }
+
+      if (data.event === "search_complete") {
+        setStatus("idle");
+        setHasSearched(true);
       }
     };
 
@@ -31,12 +39,12 @@ export function useJobSearch() {
     return () => socket.close();
   }, []);
 
-  const search = useCallback((keywords) => {
+  const search = useCallback((value) => {
     const socket = socketRef.current;
     if (socket && socket.readyState === WebSocket.OPEN) {
-      socket.send(JSON.stringify({ keywords }));
+      socket.send(JSON.stringify({ keywords: value }));
     }
   }, []);
 
-  return { jobs, status, search };
+  return { jobs, status, keywords, hasSearched, search };
 }

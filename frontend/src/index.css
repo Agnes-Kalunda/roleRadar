@@ -191,3 +191,47 @@ a {
     animation: none;
   }
 }
+
+.scanning {
+  padding: 40px 0;
+  color: var(--color-ink-muted);
+  font-size: 14px;
+}
+
+.scan-bar {
+  display: block;
+  width: 120px;
+  height: 2px;
+  background: var(--color-line);
+  border-radius: 2px;
+  margin-bottom: 12px;
+  overflow: hidden;
+  position: relative;
+}
+
+.scan-bar::after {
+  content: "";
+  position: absolute;
+  left: -40%;
+  width: 40%;
+  height: 100%;
+  background: var(--color-signal);
+  animation: sweep 1.3s ease-in-out infinite;
+}
+
+@keyframes sweep {
+  0% {
+    left: -40%;
+  }
+  100% {
+    left: 100%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .scan-bar::after {
+    animation: none;
+    left: 0;
+    width: 100%;
+  }
+}

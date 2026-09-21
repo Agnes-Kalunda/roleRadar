@@ -10,7 +10,7 @@ const STATUS_LABELS = {
 };
 
 export default function App() {
-  const { jobs, status, search } = useJobSearch();
+  const { jobs, status, keywords, hasSearched, search } = useJobSearch();
 
   return (
     <div className="shell">
@@ -29,7 +29,12 @@ export default function App() {
           </p>
         </aside>
         <main className="ledger">
-          <JobList jobs={jobs} />
+          <JobList
+            jobs={jobs}
+            status={status}
+            keywords={keywords}
+            hasSearched={hasSearched}
+          />
         </main>
       </div>
     </div>
