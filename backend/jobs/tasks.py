@@ -1,4 +1,5 @@
 import hashlib
+import re
 
 from asgiref.sync import async_to_sync
 from celery import shared_task
@@ -11,6 +12,11 @@ from jobs.scrapers.registry import get_all_scrapers
 
 _model = None
 
+COMPANY_SUFFIXES = {
+    "inc", "incorporated", "llc", "ltd", "limited", "corp",
+    "corporation", "co", "company", "gmbh", "plc", "llp",
+}
+
 
 def get_embedding_model():
     global _model
@@ -19,8 +25,20 @@ def get_embedding_model():
     return _model
 
 
-def make_dedupe_key(title, company, location):
-    raw = f"{title.lower()}|{company.lower()}|{location.lower()}"
+def normalize_title(title):
+    return re.sub(r"\s+", " ", title.strip().lower())
+
+
+def normalize_company(company):
+    cleaned = re.sub(r"[^\w\s]", "", company.lower())
+    words = [word for word in cleaned.split() if word]
+    while words and words[-1] in COMPANY_SUFFIXES:
+        words.pop()
+    return " ".join(words)
+
+
+def make_dedupe_key(title, company):
+    raw = f"{normalize_title(title)}|{normalize_company(company)}"
     return hashlib.sha256(raw.encode()).hexdigest()
 
 
@@ -39,10 +57,12 @@ def scrape_source(source_name):
 
 @shared_task
 def process_scraped_job(raw_job):
-    dedupe_key = make_dedupe_key(
-        raw_job["title"], raw_job["company"], raw_job.get("location", "")
-    )
+    dedupe_key = make_dedupe_key(raw_job["title"], raw_job["company"])
+
     if JobListing.objects.filter(dedupe_key=dedupe_key).exists():
+        return
+
+    if raw_job.get("url") and JobListing.objects.filter(source_url=raw_job["url"]).exists():
         return
 
     embedding = get_embedding_model().encode(raw_job["description"]).tolist()

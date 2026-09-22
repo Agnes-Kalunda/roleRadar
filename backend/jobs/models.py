@@ -8,7 +8,7 @@ class JobListing(models.Model):
     location = models.CharField(max_length=200, blank=True)
     description = models.TextField()
     source = models.CharField(max_length=100)
-    source_url = models.URLField()
+    source_url = models.URLField(db_index=True)
     tags = models.TextField(blank=True, default="")
     dedupe_key = models.CharField(max_length=64, unique=True)
     embedding = VectorField(dimensions=384, null=True)
