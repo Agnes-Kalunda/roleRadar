@@ -46,5 +46,11 @@ export function useJobSearch() {
     }
   }, []);
 
-  return { jobs, status, keywords, hasSearched, search };
+  const resetSearch = useCallback(() => {
+    setJobs([]);
+    setKeywords("");
+    setHasSearched(false);
+  }, []);
+
+  return { jobs, status, keywords, hasSearched, search, resetSearch };
 }

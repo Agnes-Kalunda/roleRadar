@@ -93,6 +93,8 @@ def broadcast_new_job(job):
                 "company": job.company,
                 "location": job.location,
                 "url": job.source_url,
+                "tags": job.tags,
+                "scraped_at": job.scraped_at.isoformat(),
             },
         },
     )

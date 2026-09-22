@@ -235,3 +235,242 @@ a {
     width: 100%;
   }
 }
+
+.job-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 16px;
+}
+
+.job-card {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 18px;
+  border: 1px solid var(--color-line);
+  border-radius: 12px;
+  background: #ffffff;
+}
+
+.job-card-badges {
+  display: flex;
+  gap: 6px;
+}
+
+.badge {
+  font-size: 11px;
+  padding: 3px 8px;
+  border-radius: 20px;
+  background: var(--color-paper-alt);
+  color: var(--color-ink-muted);
+}
+
+.badge-new {
+  background: var(--color-signal);
+  color: var(--color-paper);
+}
+
+.job-card-title {
+  font-family: "Source Serif 4", serif;
+  font-weight: 600;
+  font-size: 17px;
+  margin: 0;
+}
+
+.job-card-meta {
+  font-size: 13px;
+  color: var(--color-ink-muted);
+  margin: 0;
+}
+
+.job-card-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.tag-chip {
+  font-size: 12px;
+  padding: 3px 9px;
+  border-radius: 20px;
+  border: 1px solid var(--color-line);
+  color: var(--color-ink-muted);
+}
+
+.tag-chip-more {
+  color: var(--color-signal);
+  border-color: var(--color-signal);
+}
+
+.apply-button {
+  margin-top: auto;
+  text-align: center;
+  padding: 10px;
+  border-radius: 8px;
+  background: var(--color-signal);
+  color: var(--color-paper);
+  text-decoration: none;
+  font-size: 14px;
+}
+
+.empty-panel {
+  display: grid;
+  grid-template-columns: 1fr 1px 1fr;
+  gap: 40px;
+  margin-top: 24px;
+  padding: 36px;
+  border: 1px solid var(--color-line);
+  border-radius: 12px;
+  background: #ffffff;
+}
+
+.empty-primary {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.radar-mark {
+  width: 48px;
+  height: 48px;
+  margin-bottom: 14px;
+}
+
+.radar-ring {
+  fill: none;
+  stroke: var(--color-line);
+  stroke-width: 1.5;
+}
+
+.radar-dot {
+  fill: var(--color-signal);
+}
+
+.empty-primary h2 {
+  font-family: "Source Serif 4", serif;
+  font-weight: 600;
+  font-size: 19px;
+  color: var(--color-ink);
+  margin: 0 0 6px;
+}
+
+.empty-primary p {
+  font-size: 14px;
+  color: var(--color-ink-muted);
+  margin: 0 0 20px;
+}
+
+.suggestion-block {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.suggestion-label {
+  font-size: 12px;
+  color: var(--color-ink-muted);
+  text-transform: lowercase;
+}
+
+.suggestion-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.suggestion-chip {
+  font-size: 13px;
+  padding: 6px 14px;
+  border-radius: 20px;
+  border: 1px solid var(--color-line);
+  background: transparent;
+  color: var(--color-ink);
+  cursor: pointer;
+}
+
+.suggestion-chip:hover {
+  border-color: var(--color-signal);
+  color: var(--color-signal);
+}
+
+.suggestion-chip:focus-visible {
+  outline: 2px solid var(--color-signal);
+  outline-offset: 2px;
+}
+
+.empty-divider {
+  background: var(--color-line);
+}
+
+.empty-steps {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.empty-steps li {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+}
+
+.step-number {
+  flex-shrink: 0;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  border: 1px solid var(--color-line);
+  color: var(--color-ink-muted);
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.step-title {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--color-ink);
+}
+
+.step-description {
+  margin: 2px 0 0;
+  font-size: 13px;
+  color: var(--color-ink-muted);
+}
+
+@media (max-width: 720px) {
+  .empty-panel {
+    grid-template-columns: 1fr;
+  }
+
+  .empty-divider {
+    height: 1px;
+    width: 100%;
+  }
+}
+
+.clear-button {
+  margin-top: 12px;
+  padding: 8px 12px;
+  border: 1px solid var(--color-line);
+  border-radius: 4px;
+  background: transparent;
+  color: var(--color-ink-muted);
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.clear-button:hover {
+  border-color: var(--color-flag);
+  color: var(--color-flag);
+}
+
+.clear-button:focus-visible {
+  outline: 2px solid var(--color-signal);
+  outline-offset: 2px;
+}
